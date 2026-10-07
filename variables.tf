@@ -19,3 +19,8 @@ variable "database_connection_string" {
   type      = string
   sensitive = true
 }
+
+variable "vercel_api_token" {
+  type      = string
+  sensitive = true
+}
