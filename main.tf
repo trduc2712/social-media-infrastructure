@@ -35,9 +35,10 @@ resource "render_web_service" "api" {
   region = "singapore"
   runtime_source = {
     docker = {
-      repo_url    = "https://github.com/trduc2712/social-media-api"
-      branch      = "main"
-      auto_deploy = true
+      repo_url            = "https://github.com/trduc2712/social-media-api"
+      branch              = "main"
+      auto_deploy         = true
+      auto_deploy_trigger = "checksPass"
     }
   }
 }
