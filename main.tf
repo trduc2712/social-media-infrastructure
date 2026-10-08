@@ -29,6 +29,11 @@ provider "vercel" {
   api_token = var.vercel_api_token
 }
 
+locals {
+  ui_origin_custom = "https://${vercel_project_domain.ui.domain}"
+  ui_origin_auto   = "https://${vercel_project.ui.name}.vercel.app"
+}
+
 resource "render_web_service" "api" {
   name   = "social-media-api-staging"
   plan   = "free"
@@ -55,8 +60,10 @@ resource "render_env_group" "api" {
     ConnectionStrings__Default          = { value = var.database_connection_string }
     ASPNETCORE_FORWARDEDHEADERS_ENABLED = { value = "true" }
     Clerk__AuthorizedParties__0         = { value = render_web_service.api.url }
-    Clerk__AuthorizedParties__1         = { value = "https://${vercel_project_domain.ui.domain}" }
-    Cors__AllowedOrigins__0             = { value = "https://${vercel_project_domain.ui.domain}" }
+    Clerk__AuthorizedParties__1         = { value = local.ui_origin_custom }
+    Clerk__AuthorizedParties__2         = { value = local.ui_origin_auto }
+    Cors__AllowedOrigins__0             = { value = local.ui_origin_custom }
+    Cors__AllowedOrigins__1             = { value = local.ui_origin_auto }
   }
 }
 
