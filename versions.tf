@@ -17,5 +17,10 @@ terraform {
       source  = "vercel/vercel"
       version = "~> 5.19"
     }
+
+    b2 = {
+      source  = "Backblaze/b2"
+      version = "~> 0.14"
+    }
   }
 }
