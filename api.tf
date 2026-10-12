@@ -28,6 +28,11 @@ resource "render_env_group" "api" {
     Clerk__AuthorizedParties__2         = { value = local.ui_origin_auto }
     Cors__AllowedOrigins__0             = { value = local.ui_origin_custom }
     Cors__AllowedOrigins__1             = { value = local.ui_origin_auto }
+    Storage__ServiceUrl                 = { value = local.storage_service_url }
+    Storage__Region                     = { value = local.storage_region }
+    Storage__BucketName                 = { value = b2_bucket.uploads.bucket_name }
+    Storage__AccessKeyId                = { value = b2_application_key.api.application_key_id }
+    Storage__SecretAccessKey            = { value = b2_application_key.api.application_key }
   }
 }
 
